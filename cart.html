@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            text-align: center;
+            color: #555;
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        td img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 12px;
+            font-size: 1.2rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome, {{ username }}!</h1>
+
+        <!-- show current menu -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in itemList %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.picture }}" alt="Item Image">
+                        </td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>₹{{ item.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Total Price: ₹{{ total_price }}</h2>
+
+        <form action="{% url 'checkout' username %}">
+            <input type="submit" value="CHECK OUT" />
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 30px;
+        }
+        h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .address {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Thank you for your order, {{ username }}!</h1>
+
+        <h2>Delivery Address</h2>
+        <div class="address">
+            <p>{{ customer.address }}</p>
+        </div>
+
+        <p>Your order will be delivered to this location shortly. Thank you for choosing Meal Mate!</p>
+
+        {% if cart_items %}
+            <a href="{% url 'customer_menu' cart_items.0.restaurant.id username %}" class="btn">Back to Restaurants</a>
+        {% else %}
+            <a href="/" class="btn">Back to Home</a>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        <p>Meal Mate &copy; 2025</p>
+    </div>
+
+</body>
+</html>

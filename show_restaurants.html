@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+        }
+        td {
+            color: #555;
+        }
+        td img {
+            width: 100px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        td a {
+            display: inline-block;
+            margin: 5px 0;
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        td a:hover {
+            background-color: #45a049;
+        }
+        td a:active {
+            background-color: #388e3c;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Restaurant List</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Restaurant Name</th>
+                <th>Picture</th>
+                <th>Cuisine</th>
+                <th>Rating</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in restaurantList %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>
+                        <img src="{{ r.picture }}" alt="Restaurant Image">
+                    </td>
+                    <td>{{ r.cuisine }}</td>
+                    <td>{{ r.rating }}</td>
+                    <td>
+                        <a href="{% url 'open_update_restaurant' r.id %}">Update Restaurant Info</a>
+                        <br>
+                        <a href="{% url 'delete_restaurant' r.id %}">Delete Restaurant</a>
+                        <br>
+                        <a href="{% url 'open_update_menu' r.id %}">Update Menu</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
